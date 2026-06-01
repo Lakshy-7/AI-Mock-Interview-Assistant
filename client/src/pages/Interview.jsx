@@ -17,33 +17,36 @@ function Interview() {
   const [completed, setCompleted] = useState(false)
 
   const handleSubmit = async () => {
-    if (answer.trim() === "") {
-      setFeedback("Please enter an answer before submitting.")
-      setScore("")
-      return
-    }
-
-    setLoading(true)
-
-    try {
-      const response = await fetch("http://127.0.0.1:8000/feedback", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-
-      const data = await response.json()
-
-      setFeedback(data.feedback)
-      setScore(data.score)
-    } catch (error) {
-      setFeedback("Backend connection failed.")
-      setScore("")
-    }
-
-    setLoading(false)
+  if (answer.trim() === "") {
+    setFeedback("Please enter an answer before submitting.")
+    setScore("")
+    return
   }
+
+  setLoading(true)
+
+  try {
+    const response = await fetch("http://127.0.0.1:8000/feedback", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        answer: answer,
+      }),
+    })
+
+    const data = await response.json()
+
+    setFeedback(data.feedback)
+    setScore("")
+  } catch (error) {
+    setFeedback("Backend connection failed.")
+    setScore("")
+  }
+
+  setLoading(false)
+}
 
   const handleNextQuestion = () => {
     if (currentQuestion === questions.length - 1) {

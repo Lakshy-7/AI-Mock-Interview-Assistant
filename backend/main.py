@@ -1,5 +1,15 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+from dotenv import load_dotenv
+from groq import Groq
+import os
+
+load_dotenv()
+
+client = Groq(
+    api_key=os.getenv("GROQ_API_KEY")
+)
 
 app = FastAPI()
 
@@ -11,13 +21,36 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+class AnswerRequest(BaseModel):
+    answer: str
+
 @app.get("/")
 def home():
     return {"message": "AI Mock Interview Backend Running"}
 
 @app.post("/feedback")
-def get_feedback():
-    return {
-        "feedback": "Great answer! Try adding more technical examples.",
-        "score": "8/10"
-    }
+def get_feedback(data: AnswerRequest):
+
+    try:
+        response = client.chat.completions.create(
+            model="llama-3.1-8b-instant",
+            messages=[
+                {
+                    "role": "system",
+                    "content": "You are a technical interviewer. Give short interview feedback and a score out of 10."
+                },
+                {
+                    "role": "user",
+                    "content": data.answer
+                }
+            ]
+        )
+
+        return {
+            "feedback": response.choices[0].message.content
+        }
+
+    except Exception as e:
+        return {
+            "feedback": f"ERROR: {str(e)}"
+        }
