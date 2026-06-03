@@ -46,11 +46,15 @@ def get_feedback(data: AnswerRequest):
             ]
         )
 
+        feedback_text = response.choices[0].message.content
+
         return {
-            "feedback": response.choices[0].message.content
+            "feedback": feedback_text,
+            "score": 8
         }
 
     except Exception as e:
         return {
-            "feedback": f"ERROR: {str(e)}"
+            "feedback": f"ERROR: {str(e)}",
+            "score": 0
         }
