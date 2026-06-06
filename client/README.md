@@ -1,16 +1,67 @@
-# React + Vite
+# AI Mock Interview Assistant
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+AI-powered mock interview platform built with React, FastAPI, and Groq AI.
 
-Currently, two official plugins are available:
+## Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Frontend:
+https://ai-mock-interview-assistant-wheat.vercel.app
 
-## React Compiler
+Backend:
+https://ai-mock-interview-backend-l88o.onrender.com
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Features
 
-## Expanding the ESLint configuration
+* AI-generated interview feedback
+* AI-based scoring system
+* Role-based interview questions
+* Interview performance dashboard
+* Interview history tracking
+* PDF report download
+* Responsive UI
+* Full-stack deployment
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Tech Stack
+
+### Frontend
+
+* React.js
+* Vite
+* Tailwind CSS
+
+### Backend
+
+* FastAPI
+* Python
+* Groq AI
+
+### Deployment
+
+* Vercel
+* Render
+
+## Run Locally
+
+### Frontend
+
+```bash
+cd client
+npm install
+npm run dev
+```
+
+### Backend
+
+```bash
+cd backend
+pip install -r requirements.txt
+uvicorn main:app --reload
+```
+
+## Live Project
+
+https://ai-mock-interview-assistant-wheat.vercel.app
+
+## Author
+
+Lakshy Choudhary
